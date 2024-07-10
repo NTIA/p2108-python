@@ -42,10 +42,15 @@ jobs:
       - name: Change to Python wrapper directory
         run: cd wrap/python
 
+      - name: Install cibuildwheel
+        run: python -m pip install cibuildwheel=2.19.2
+        working-directory: wrap/python
+
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.19.2
+        run: python -m cibuildwheel --output-dir wheelhouse
+        working-directory: wrap/python
 
       - uses: actions/upload-artifact@v4
         with:
           name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
-          path: ./wheelhouse/*.whl
+          path: ./wrap/python/wheelhouse/*.whl
