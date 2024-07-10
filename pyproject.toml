@@ -65,3 +65,7 @@ path = "src/ITS/ITU/PSeries/P2108/__init__.py"
 [tool.hatch.build.targets.wheel]
 packages = ["src/ITS"]
 ignore-vcs = true
+
+[tool.cibuildwheel]
+test-command = "pytest ."
+test-requires = "pytest"

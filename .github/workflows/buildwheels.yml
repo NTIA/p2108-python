@@ -1,0 +1,51 @@
+name: Build Wheels
+
+on: [push, pull_request] # TODO
+
+jobs:
+  build_wheels:
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # macos-13 is an intel runner, macos-14 is apple silicon
+        # windows-2019 is used for 32-bit, windows-latest for 64-bit
+        os: [ubuntu-latest, windows-2019, windows-latest, macos-13, macos-14]
+
+    steps:
+        # TODO replace build from source with grabbing release binaries
+      - name: Checkout parent repository
+        uses: actions/checkout@v4
+        with:
+          repository: NTIA/p2108
+          ref: AddPythonWrapper # Todo remove
+        
+      - name: Install CMake # (latest stable version)
+        uses: lukka/get-cmake@latest
+    
+      - name: "CMake: Build (32-bit)"
+        if: matrix.os == 'windows-2019'
+        uses: lukka/run-cmake@v10
+        with:
+          configurePreset: release32
+          configurePresetAdditionalArgs: "['-DBUILD_DOCS=OFF', '-DRUN_TESTS=OFF']"
+          buildPreset: release32
+    
+      - name: "CMake: Build (64-bit)"
+        if: matrix.os != 'windows-2019'
+        uses: lukka/run-cmake@v10
+        with:
+          configurePreset: release64
+          configurePresetAdditionalArgs: "['-DBUILD_DOCS=OFF', '-DRUN_TESTS=OFF']"
+          buildPreset: release64
+        
+      - name: Change to Python wrapper directory
+        run: cd wrap/python
+
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.19.2
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
+          path: ./wheelhouse/*.whl
