@@ -46,6 +46,10 @@ jobs:
         run: python -m pip install cibuildwheel==2.19.2
         working-directory: wrap/python
 
+      - name: List files in subdir (DEBUG)
+        run: ls
+        working-directory: wrap/python
+
       - name: Build wheels
         run: python -m cibuildwheel --output-dir wheelhouse
         working-directory: wrap/python
