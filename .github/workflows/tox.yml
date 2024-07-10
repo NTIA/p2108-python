@@ -45,9 +45,11 @@ jobs:
           ref: AddPythonWrapper # Todo remove
 
       - name: Clone required submodules
-        run: |
-          git submodule init wrap/python
-          git submodule update
+        uses: pietrobolcato/action-clone-private-submodule@main
+        with:
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          module_link: NTIA/p2108-python
+          module_path: wrap/python
     
       - name: Install tox-gh
         run: python -m pip install tox-gh

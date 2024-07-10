@@ -19,6 +19,13 @@ jobs:
         with:
           repository: NTIA/p2108
           ref: AddPythonWrapper # Todo remove
+
+      - name: Clone required submodules
+        uses: pietrobolcato/action-clone-private-submodule@main
+        with:
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          module_link: NTIA/p2108-python
+          module_path: wrap/python
         
       - name: Install CMake # (latest stable version)
         uses: lukka/get-cmake@latest
