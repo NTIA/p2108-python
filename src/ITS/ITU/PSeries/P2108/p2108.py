@@ -88,31 +88,19 @@ def HeightGainTerminalCorrectionModel(
     R__meter: float,
     clutter_type: ClutterType,
 ) -> float:
-    """
-    Description
-    -----------
-    Height gain terminal correction model as described in Section 3.1.
+    """Height gain terminal correction model as described in Section 3.1.
+
     This method gives the median loss due to different terminal surroundings.
     This model can be applied to both transmitting and receiving ends of the path.
 
-    Parameters
-    ----------
-    f__ghz : FLOAT
-        Frequency, in GHz.
-    h__meter : FLOAT
-        Antenna height, in meters.
-    w_s__meter : FLOAT
-        Street width, in meters.
-    R__meter : FLOAT
-        Representative clutter height, in meters.
-    clutter_type : INT # TODO enum
-        Clutter type.
-
-    Returns
-    -------
-    FLOAT
-        Additional loss (clutter loss), in dB.
-
+    :param f__ghz: Frequency, in GHz.
+    :param h__meter: Antenna height, in meters.
+    :param w_s__meter: Street width, in meters.
+    :param R__meter: Representative clutter height, in meters.
+    :param clutter_type: Clutter type, a ClutterType enum value.
+    :raises ValueError: If any input parameter is not in its valid range.
+    :raises Exception: If an unknown error is encountered.
+    :return: Additional loss (clutter loss), in dB.
     """
     A_h__db = c_double()
     err_check(
@@ -130,27 +118,16 @@ def HeightGainTerminalCorrectionModel(
 
 
 def TerrestrialStatisticalModel(f__ghz: float, d__km: float, p: float) -> float:
-    """
-    Description
-    -----------
-    Statistical clutter loss model for terrestrial paths as described
-    in Section 3.2. This model can be applied for urban and suburban
-    clutter loss modelling.
+    """Statistical clutter loss model for terrestrial paths as described in
+    Section 3.2. This model can be applied for urban and suburban clutter loss
+    modeling.
 
-    Parameters
-    ----------
-    f__ghz : FLOAT
-        Frequency, in GHz.
-    d__km : FLOAT
-        Path distance, in km.
-    p : FLOAT
-        Percentange of locations, in %.
-
-    Returns
-    -------
-    FLOAT
-        Additional loss (clutter loss), in dB.
-
+    :param f__ghz: Frequency, in GHz.
+    :param d__km: Path distance, in km.
+    :param p: Percentange of locations, in %.
+    :raises ValueError: If any input parameter is not in its valid range.
+    :raises Exception: If an unknown error is encountered.
+    :return: Additional loss (clutter loss), in dB.
     """
     L_ctt__db = c_double()
     err_check(
@@ -166,31 +143,21 @@ def TerrestrialStatisticalModel(f__ghz: float, d__km: float, p: float) -> float:
 
 
 def AeronauticalStatisticalModel(f__ghz: float, theta__deg: float, p: float) -> float:
-    """
-    Description
-    -----------
-    The Earth-space and aeronautical statistical clutter loss
-    model as described in Section 3.3. This model is applicable
-    when one end of the path is within man-made clutter and the
-    other end is a satellite, aeroplane, or other platform
-    above the Earth.
+    """The Earth-space and aeronautical statistical clutter loss model as
+    described in Section 3.3. This model is applicable when one end of the path
+    is within man-made clutter and the other end is a satellite, aeroplane, or
+    other platform above the Earth.
 
-    Parameters
-    ----------
-    f__ghz : FLOAT
-        Frequency, in GHz.
-    theta__deg : FLOAT
-        Elevation angle, in degrees.
-    p : FLOAT
-        Percentange of locations, in %.
+    Frequency range: 10 < f < 100 (GHz)
+    Elevation angle range: 0 < theta < 90 (degrees)
+    Percentage locations range: 0 < p < 100 (%)
 
-    Returns
-    -------
-    INT
-        Return code.
-    FLOAT
-        Additional loss (clutter loss), in dB.
-
+    :param f__ghz: Frequency, in GHz.
+    :param theta__deg: Elevation angle, in degrees.
+    :param p: Percentange of locations, in %.
+    :raises ValueError: If any input parameter is not in its valid range.
+    :raises Exception: If an unknown error is encountered.
+    :return: Additional loss (clutter loss), in dB.
     """
     L_ces__db = c_double()
     err_check(
