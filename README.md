@@ -18,8 +18,8 @@ the Recommendation.
 
 For an overview of the available functions of this model, view the
 [NTIA/ITS Propagation Library Wiki](https://ntia.github.io/propagation-library-wiki/models/P2108).
-Additionally, Python-specific usage information and examples are available
-[here](https://github.com/NTIA/propagation/models/P2108/python).
+Additionally, Python-specific usage information, installation instructions, and
+code examples are available [here](https://ntia.github.io/propagation-library-wiki/models/P2108/python).
 
 ## Development ##
 
