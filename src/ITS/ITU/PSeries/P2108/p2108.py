@@ -1,4 +1,5 @@
 import platform
+import sys
 from ctypes import *
 from enum import IntEnum
 from pathlib import Path
@@ -29,19 +30,24 @@ class ClutterType(IntEnum):
 
 
 # Load the compiled library
+lib_name = "P2108"
+if sys.maxsize > 2**32:
+    lib_name += "x64"
+else:
+    # note: 32-bit python is needed to load 32-bit lib.
+    lib_name += "x86"
 if platform.uname()[0] == "Windows":
-    lib_name = "P2108.dll"
+    lib_name += ".dll"
 elif platform.uname()[0] == "Linux":
-    lib_name = "libP2108.so.1.0"
-# elif platform.uname()[0] == "Darwin":
-# lib_name = "P2108.dylib" # TODO test and confirm
+    lib_name += ".so"
+elif platform.uname()[0] == "Darwin":
+    lib_name += ".dylib"
 else:
     raise NotImplementedError("Your OS is not yet supported")
 
 # Library should be in the same directory as this file
 lib_path = Path(__file__).parent / lib_name
 lib = CDLL(str(lib_path.resolve()))
-# note: 32-bit python is needed to load 32-bit lib.
 
 # Define function prototypes
 lib.AeronauticalStatisticalModel.restype = c_int
