@@ -7,21 +7,21 @@ name = "P2108"
 dynamic = ["version"]
 description = "Python wrapper for U.S. Reference Software Implementation of Recommendation ITU-R P.2108"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 license = { file = "LICENSE.md" }
 
 authors = [
-    { name = "The Institute for Telecommunication Sciences" },
-]
-
-maintainers = [
-    { name = "Billy Kozma", email = "wkozma@ntia.gov" },
-    { name = "Anthony Romaniello", email = "aromaniello@ntia.gov" },
+    { name = "The Institute for Telecommunication Sciences", email = "code@ntia.gov" },
 ]
 
 keywords = [
-    "propagation", "clutter", "radio", "telecommunications",
-    "ITU", "NTIA", "ITS",
+    "propagation",
+    "clutter",
+    "radio",
+    "telecommunications",
+    "ITU",
+    "NTIA",
+    "ITS",
 ]
 
 classifiers = [
@@ -33,24 +33,20 @@ classifiers = [
     "Operating System :: POSIX :: Linux",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
 ]
 
 [project.optional-dependencies]
 tests = [
     "pytest>=8.2.0,<9.0",
     "pytest-cov>=5.0.0,<6.0",
-    "tox>=4.15.0,<5.0",  # Keep in sync with tox.ini minimum_version
+    "tox>=4.15.0,<5.0",       # Keep in sync with tox.ini minimum_version
 ]
-dev = [
-    "hatchling>=1.24.2,<2.0",
-    "pre-commit>=3.5.0,<4.0",
-    "P2108[tests]",
-]
+dev = ["hatchling>=1.24.2,<2.0", "pre-commit>=3.5.0,<4.0", "P2108[tests]"]
 
 [project.urls]
 "Python Wrapper Source" = "https://github.com/NTIA/p2108-python"
