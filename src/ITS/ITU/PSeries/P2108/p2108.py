@@ -1,5 +1,4 @@
 import platform
-import sys
 from ctypes import *
 from enum import IntEnum
 from pathlib import Path
