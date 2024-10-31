@@ -14,7 +14,7 @@ class ClutterType(IntEnum):
 
 
 # Load the compiled library
-lib_name = "P2108"
+lib_name = "P2108-1.0"
 if platform.uname()[0] == "Windows":
     lib_name += ".dll"
 elif platform.uname()[0] == "Linux":
