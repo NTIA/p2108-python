@@ -64,7 +64,7 @@ instead of `release64`.
 
     ```cmd
     # From the cloned repository:
-    
+
     cmake --preset release64 -DBUILD_DOCS=OFF -DRUN_TESTS=OFF
     cmake --build --preset release64
     ```
