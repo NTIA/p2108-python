@@ -29,7 +29,7 @@ def test_AeronauticalStatisticalModel(inputs, rtn, expected):
         out = P2108.AeronauticalStatisticalModel(*inputs)
         assert out == pytest.approx(expected, abs=ABSTOL__DB)
     else:
-        with pytest.raises(ValueError):
+        with pytest.raises(RuntimeError):
             P2108.AeronauticalStatisticalModel(*inputs)
 
 
@@ -43,7 +43,7 @@ def test_HeightGainTerminalCorrection(inputs, rtn, expected):
         out = P2108.HeightGainTerminalCorrectionModel(*inputs[:-1], clutter_type)
         assert out == pytest.approx(expected, abs=ABSTOL__DB)
     else:
-        with pytest.raises(ValueError):
+        with pytest.raises(RuntimeError):
             P2108.HeightGainTerminalCorrectionModel(*inputs[:-1], clutter_type)
 
 
@@ -55,5 +55,5 @@ def test_TerrestrialStatisticalModel(inputs, rtn, expected):
         out = P2108.TerrestrialStatisticalModel(*inputs)
         assert out == pytest.approx(expected, abs=ABSTOL__DB)
     else:
-        with pytest.raises(ValueError):
+        with pytest.raises(RuntimeError):
             P2108.TerrestrialStatisticalModel(*inputs)

@@ -4,21 +4,6 @@ from ctypes import *
 from enum import IntEnum
 from pathlib import Path
 
-ERROR_CODES = {
-    0: "Successful execution",
-    3100: "Frequency must be between 0.3 and 3 GHz, inclusive",
-    3101: "Antenna heigh must be >= 0 meters",
-    3102: "Street width must be > 0 meters",
-    3103: "Representative clutter height must be > 0 meters",
-    3104: "Invalid value for clutter type",
-    3200: "Frequency must be between 2 and 67 GHz, inclusive",
-    3201: "Path distance must be >= 0.25 km",
-    3202: "Percentage must be between 0 and 100",
-    3300: "Frequency must be between 10 and 100 GHz, inclusive",
-    3301: "Elevation angle must be between 0 and 100 GHz, inclusive",
-    3302: "Percentage must be between 0 and 100, inclusive",
-}
-
 
 class ClutterType(IntEnum):
     WaterSea = 1
@@ -31,11 +16,6 @@ class ClutterType(IntEnum):
 
 # Load the compiled library
 lib_name = "P2108"
-if sys.maxsize > 2**32:
-    lib_name += "x64"
-else:
-    # note: 32-bit python is needed to load 32-bit lib.
-    lib_name += "x86"
 if platform.uname()[0] == "Windows":
     lib_name += ".dll"
 elif platform.uname()[0] == "Linux":
@@ -73,18 +53,30 @@ lib.HeightGainTerminalCorrectionModel.argtypes = (
     c_int,
     POINTER(c_double),
 )
+lib.GetReturnStatusCharArray.restype = POINTER(c_char_p)
+lib.GetReturnStatusCharArray.argtypes = (c_int,)
+lib.FreeReturnStatusCharArray.restype = None
+lib.FreeReturnStatusCharArray.argtypes = (POINTER(c_char_p),)
 
 
-def err_check(error_code: int) -> None:
-    """ """
-    ec = error_code
-    if ec == 0:
+def err_check(rtn_code: int) -> None:
+    """Parse the library's return code and raise an error if one occurred.
+
+    Returns immediately for `rtn_code == 0`, otherwise retrieves the
+    status message string from the underlying library and raises a
+    RuntimeError with the status message.
+
+    :param rtn_code: Integer return code from the underlying library.
+    :raises RuntimeError: For any non-zero inputs.
+    :return: None
+    """
+    if rtn_code == 0:
         return
-    if ec in ERROR_CODES:
-        # All errors as of v1.0 pertain to inputs out-of-range
-        raise ValueError(ec)
     else:
-        raise Exception(f"ITS.ITU.PSeries.P2108 returned unknown error {ec}")
+        msg = lib.GetReturnStatusCharArray(c_int(rtn_code))
+        msg_str = cast(msg, c_char_p).value.decode("utf-8")
+        lib.FreeReturnStatusCharArray(msg)
+        raise RuntimeError(msg_str)
 
 
 def HeightGainTerminalCorrectionModel(
