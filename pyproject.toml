@@ -40,7 +40,7 @@ tests = [
     "tox>=4.23.2,<5.0",         # Keep in sync with tox.ini minimum_version
 ]
 dev = [
-    "hatchling>=1.5.0,<2.0",
+    "hatchling>=1.25.0,<2.0",
     "pre-commit>=4.0.1,<5.0",
     "proplib_template[tests]",  # TODO-TEMPLATE set to this package
 ]
