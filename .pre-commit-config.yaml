@@ -40,3 +40,4 @@ repos:
       - id: markdownlint
         types: [file, markdown]
         exclude: GitHubRepoPublicReleaseApproval.md
+        args: ["--disable", "MD013"]

@@ -6,7 +6,7 @@ import pytest
 from ITS.ITU.PSeries import P2108
 
 # Test data is expected to exist in parent repository
-# (i.e., that NTIA/P2108-python is cloned as a submodule of NTIA/P2108)
+# (i.e., that this Python wrapper repo is cloned as a submodule of the base repo)
 TEST_DATA_DIR = (Path(__file__).parent.parent.parent.parent / "tests") / "data"
 ABSTOL__DB = 0.1  # Absolute tolerance, in dB, to ensure outputs match expected value
 

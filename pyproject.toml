@@ -29,6 +29,7 @@ classifiers = [
     "Intended Audience :: Telecommunications Industry",
     "License :: Public Domain",
     "Natural Language :: English",
+    "Operating System :: MacOS",
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX :: Linux",
     "Programming Language :: Python",
@@ -43,11 +44,14 @@ classifiers = [
 [project.optional-dependencies]
 tests = [
     "pytest>=8.2.0,<9.0",
-    "pytest-cov>=5.0.0,<6.0",
-    "tox>=4.15.0,<5.0",       # Keep in sync with tox.ini minimum_version
+    "pytest-cov>=6.0.0,<7.0",
+    "tox>=4.23.2,<5.0",         # Keep in sync with tox.ini minimum_version
 ]
-dev = ["hatchling>=1.24.2,<2.0", "pre-commit>=3.5.0,<4.0", "P2108[tests]"]
-
+dev = [
+    "hatchling>=1.5.0,<2.0",
+    "pre-commit>=4.0.1,<5.0",
+    "P2108[tests]",
+]
 [project.urls]
 "Python Wrapper Source" = "https://github.com/NTIA/p2108-python"
 "Python Wrapper Bug Tracker" = "https://github.com/NTIA/p2108-python/issues"
