@@ -41,9 +41,11 @@ return_code = lib.SomeLibraryFunction()
 lib.err_check(return_code)
 ```
 """
+
 import platform
 from ctypes import *
 from pathlib import Path
+
 
 class PropLibCDLL(CDLL):
     def __init__(self, name):
@@ -62,7 +64,7 @@ class PropLibCDLL(CDLL):
         This function appends the correct file extension based on the current platform,
         and prepends the full absolute file path. The shared library is expected
         to exist in the same directory as this file.
-        
+
         :param lib_name: The library name, with no extension or path, e.g., "P2108-1.0"
         :raises NotImplementedError: For platforms other than Windows, Linux, or macOS.
         :return: The full filename, including path and extension, of the library.
@@ -79,7 +81,6 @@ class PropLibCDLL(CDLL):
         # Library should be in the same directory as this file
         lib_path = Path(__file__).parent / lib_name
         return str(lib_path.resolve())
-
 
     def err_check(self, rtn_code: int) -> None:
         """Parse the library's return code and raise an error if one occurred.

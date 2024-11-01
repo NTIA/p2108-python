@@ -203,7 +203,7 @@ Below are some examples of how CMake can be called to compile this software.
 
 ```bash
 # Configure and compile in release configuration
-cmake --preset release 
+cmake --preset release
 cmake --build --preset release
 
 # Use the release configuration but don't build Doxygen docs

@@ -1,6 +1,7 @@
-# TODO-TEMPLATE: Rename this file and fix the import namespace
-from ITS.PropLibTemplate.proplib_loader import PropLibCDLL
+# TODO-TEMPLATE: Rename this file to your library name
 from ctypes import *
+
+from .proplib_loader import PropLibCDLL
 
 # TODO-TEMPLATE: Load the shared library. Example:
 # lib = PropLibCDLL("P2108-1.0")
@@ -15,5 +16,5 @@ from ctypes import *
 #     c_double,
 #     POINTER(c_double),
 # )
-    
+
 # TODO-TEMPLATE: Populate this file with wrapper functions which call the library
