@@ -66,7 +66,7 @@ This software is distributed on [PyPi](https://pypi.org/project/TODO-TEMPLATE) a
 using the following command.
 
 ```cmd
-pip install p2108
+pip install TODO-TEMPLATE
 ```
 
 General information about using this model is available on
