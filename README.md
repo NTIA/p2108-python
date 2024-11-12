@@ -1,10 +1,23 @@
 # Recommendation ITU-R P.2108 - U.S. Reference Implementation, Python #
 
+![NTIA/ITS PropLib][proplib-badge]
 ![GitHub Release][gh-releases-badge]
 ![GitHub Issues][gh-issues-badge]
+<!-- TODO: Add unit test badge after CI workflow is added -->
+<!-- [![Unit Tests Status][gh-actions-test-badge]][gh-actions-test-link] -->
+<!-- TODO: Include a DOI badge if a DOI exists for a release -->
+<!-- [![DOI][doi-badge]][doi-link] -->
 
+[proplib-badge]: https://img.shields.io/badge/NTIA-PropLib-D63E04?label=NTIA%2FITS&labelColor=162E51&link=https%3A%2F%2Fntia.github.io%2Fpropagation-library-wiki
+<!--
+[gh-actions-test-link]: https://github.com/NTIA/p2108-python/actions/workflows/tox.yml
+[gh-actions-test-badge]: https://github.com/NTIA/p2108-python/actions/workflows/tox.yml/badge.svg?branch=main
+-->
 [gh-releases-badge]: https://img.shields.io/github/v/release/NTIA/p2108-python
 [gh-issues-badge]: https://img.shields.io/github/issues/NTIA/p2108-python
+<!-- TODO-TEMPLATE: Only create a DOI for versioned public releases -->
+<!-- [doi-badge]: https://zenodo.org/badge/DOI/TODO-TEMPLATE/zenodo.TODO-TEMPLATE.svg
+[doi-link]: https://doi.org/TODO-TEMPLATE/zenodo.TODO-TEMPLATE -->
 
 Python® wrapper for U.S. Reference Software Implementation of Recommendation ITU-R
 P.2108. This Recommendation contains three methods for the prediction of clutter
@@ -84,7 +97,7 @@ into the location required by the Python wrapper.
 
 ### Running Tests ###
 
-Python unit tests can be run to confirm successfull installation. Test data is
+Python unit tests can be run to confirm successful installation. Test data is
 expected to be located in the parent repository. Therefore, if you haven't cloned
 this repository as a submodule (as described above), you will need to first specify
 the location of the test data files in `tests/test_p2108.py` (using the `TEST_DATA_DIR`
