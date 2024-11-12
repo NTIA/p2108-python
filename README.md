@@ -51,7 +51,7 @@ compiling it yourself from the C++ source code. Either way, ensure that the shar
 (`.dll`, `.dylib`, or `.so` file) is placed in `src/ITS/ITU/PSeries/P2108/`, alongside `__init__.py`.
 
 Below are the steps to build and install the Python package from source, including
-optionally compiling the shared library from the C++ source code. Working installations of Git and
+compiling the library from the C++ source code. Working installations of Git and
 Python (3.9 or above) are required. If compiling the shared library, CMake and a C++ compiler
 are also required.
 

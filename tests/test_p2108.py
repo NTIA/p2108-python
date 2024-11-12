@@ -11,6 +11,7 @@ TEST_DATA_DIR = (Path(__file__).parent.parent.parent.parent / "tests") / "data"
 ABSTOL__DB = 0.1  # Absolute tolerance, in dB, to ensure outputs match expected value
 
 
+# TODO-TEMPLATE: Update CSV reader based on test data CSV structure
 def read_csv_test_data(filename: str):
     with open(TEST_DATA_DIR / filename) as f:
         reader = csv.reader(f)
