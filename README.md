@@ -1,23 +1,19 @@
 # Recommendation ITU-R P.2108 - U.S. Reference Implementation, Python #
 
-![NTIA/ITS PropLib][proplib-badge]
-![GitHub Release][gh-releases-badge]
-![GitHub Issues][gh-issues-badge]
-<!-- TODO: Add unit test badge after CI workflow is added -->
-<!-- [![Unit Tests Status][gh-actions-test-badge]][gh-actions-test-link] -->
-<!-- TODO: Include a DOI badge if a DOI exists for a release -->
-<!-- [![DOI][doi-badge]][doi-link] -->
+[![NTIA/ITS PropLib][proplib-badge]][proplib-link]
+[![GitHub Release][gh-releases-badge]][gh-releases-link]
+[![GitHub Issues][gh-issues-badge]][gh-issues-link]
 
-[proplib-badge]: https://img.shields.io/badge/NTIA-PropLib-D63E04?label=NTIA%2FITS&labelColor=162E51&link=https%3A%2F%2Fntia.github.io%2Fpropagation-library-wiki
-<!--
-[gh-actions-test-link]: https://github.com/NTIA/p2108-python/actions/workflows/tox.yml
-[gh-actions-test-badge]: https://github.com/NTIA/p2108-python/actions/workflows/tox.yml/badge.svg?branch=main
--->
-[gh-releases-badge]: https://img.shields.io/github/v/release/NTIA/p2108-python
-[gh-issues-badge]: https://img.shields.io/github/issues/NTIA/p2108-python
-<!-- TODO-TEMPLATE: Only create a DOI for versioned public releases -->
-<!-- [doi-badge]: https://zenodo.org/badge/DOI/TODO-TEMPLATE/zenodo.TODO-TEMPLATE.svg
-[doi-link]: https://doi.org/TODO-TEMPLATE/zenodo.TODO-TEMPLATE -->
+[proplib-badge]: https://img.shields.io/badge/PropLib-badge?label=%F0%9F%87%BA%F0%9F%87%B8%20NTIA%2FITS&labelColor=162E51&color=D63E04
+[proplib-link]: https://ntia.github.io/propagation-library-wiki
+<!-- [gh-actions-test-badge]: https://img.shields.io/github/actions/workflow/status/NTIA/p2108-python/tox.yml?branch=main&logo=pytest&logoColor=ffffff&label=Build%2FTests&labelColor=162E51 -->
+<!-- [gh-actions-test-link]: https://github.com/NTIA/p2108-python/actions/workflows/tox.yml -->
+[gh-releases-badge]: https://img.shields.io/github/v/release/NTIA/p2108-python?logo=github&label=Release&labelColor=162E51&color=D63E04
+[gh-releases-link]: https://github.com/NTIA/p2108-python/releases
+[gh-issues-badge]: https://img.shields.io/github/issues/NTIA/p2108-python?logo=github&label=Issues&labelColor=162E51
+[gh-issues-link]: https://github.com/NTIA/p2108-python/issues
+<!-- [doi-badge]: https://img.shields.io/badge/{TODO-TEMPLATE-ALL-VERSIONS-DOI}-x?logo=doi&logoColor=ffffff&labelColor=162E51&color=D63E04 -->
+<!-- [doi-link]: https://zenodo.org/badge/latestdoi/{TODO-TEMPLATE-REPOSITORY-ID} -->
 
 Python® wrapper for U.S. Reference Software Implementation of Recommendation ITU-R
 P.2108. This Recommendation contains three methods for the prediction of clutter
@@ -28,10 +24,17 @@ the Recommendation. This Python package wraps the
 
 ## Getting Started ##
 
-For an overview of the available functions of this model, view the
-[NTIA/ITS Propagation Library Wiki](https://ntia.github.io/propagation-library-wiki/models/P2108).
-Additionally, Python-specific usage information, installation instructions, and
-code examples are available [here](https://ntia.github.io/propagation-library-wiki/models/P2108/python).
+This software is distributed on [PyPi](https://pypi.org/project/p2108) and is easily installable
+using the following command.
+
+```cmd
+pip install p2108
+```
+
+General information about using this model is available on
+[its page on the **NTIA/ITS Propagation Library Wiki**](https://ntia.github.io/propagation-library-wiki/models/P2108/).
+Additionally, Python-specific instructions and code examples are available
+[here](https://ntia.github.io/propagation-library-wiki/models/P2108/python).
 
 If you're a developer and would like to contribute to or extend this repository,
 please review the guide for contributors [here](CONTRIBUTING.md) or open an
@@ -39,35 +42,32 @@ please review the guide for contributors [here](CONTRIBUTING.md) or open an
 
 ## Development ##
 
-This repository contains code which wraps [the C++ source](https://github.com/NTIA/p2108)
+This repository contains code which wraps [the C++ shared library](https://github.com/NTIA/p2108)
 as an importable Python module. If you wish to contribute to this repository,
 testing your changes will require the inclusion of this shared library. You may retrieve
 this either from the
 [relevant GitHub Releases page](https://github.com/NTIA/p2108/releases), or by
-compiling it yourself from the C++ source code (instructions
-[here](https://github.com/NTIA/p2108?tab=readme-ov-file#configure-and-build)).
-If providing the shared library (`.dll`, `.dylib`, or `.so` file) manually
-from a GitHub release, place it in `src/ITS/ITU/PSeries/P2108/`, alongside
-`__init__.py`.
+compiling it yourself from the C++ source code. Either way, ensure that the shared library
+(`.dll`, `.dylib`, or `.so` file) is placed in `src/ITS/ITU/PSeries/P2108/`, alongside `__init__.py`.
 
 Below are the steps to build and install the Python package from source, including
-compiling the library from the C++ source code. Working installations of Git and
-Python (3.9 or above) are required.
+optionally compiling the shared library from the C++ source code. Working installations of Git and
+Python (3.9 or above) are required. If compiling the shared library, CMake and a C++ compiler
+are also required.
 
 1. Clone the parent repository, then initialize the Git submodule containing the
 Python wrapper. This repository structure makes test data available to the Python
 wrapper.
 
     ```cmd
-    # Clone the parent repository:
+    # Clone the parent repository
     git clone https://github.com/NTIA/p2108
     cd p2108
 
-    # Then run one of the following:
-    git submodule init wrap/python  # Only the Python wrapper
-    git submodule init              # All available wrappers
+    # Initialize Git submodules (wrappers and external dependencies)
+    git submodule init
 
-    # Finally, clone the submodule(s):
+    # Clone the submodules
     git submodule update
     ```
 
@@ -79,7 +79,7 @@ into the location required by the Python wrapper.
     **OR**
 
     Download the shared library (`.dll`, `.so`, or `.dylib`) from a
-    [GitHub Release](https://github.com/NTIA/p2108/releases). Then place the
+    [GitHub Release](https://github.com/NTIA/p2108/releases). Then place the'
     downloaded file in `src/ITS/ITU/PSeries/P2108/` (alongside `__init__.py`).
 
 1. Install the local package and development dependencies:
