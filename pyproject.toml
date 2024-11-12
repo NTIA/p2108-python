@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "TODO-TEMPLATE"
+name = "proplib-template"  # TODO-TEMPLATE update package name
 dynamic = ["version"]
 description = "TODO-TEMPLATE"
 readme = "README.md"
@@ -42,7 +42,7 @@ tests = [
 dev = [
     "hatchling>=1.25.0,<2.0",
     "pre-commit>=4.0.1,<5.0",
-    "proplib_template[tests]",  # TODO-TEMPLATE set to this package
+    "proplib-template[tests]",  # TODO-TEMPLATE set to this package
 ]
 
 [project.urls]
@@ -54,7 +54,7 @@ dev = [
 
 [tool.hatch.version]
 # TODO-TEMPLATE: Set to this package's `__init__.py`
-path = "src/ITS/.../__init__.py"
+path = "src/ITS/PropLibTemplate/__init__.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/ITS"]
