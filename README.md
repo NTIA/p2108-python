@@ -62,10 +62,17 @@ For questions about using this template repository, contact <aromaniello@ntia.go
 
 TODO-TEMPLATE: Update links in this section
 
-To get started using this model, refer to
+This software is distributed on [PyPi](https://pypi.org/project/TODO-TEMPLATE) and is easily installable
+using the following command.
+
+```cmd
+pip install p2108
+```
+
+General information about using this model is available on
 [its page on the **NTIA/ITS Propagation Library Wiki**](https://ntia.github.io/propagation-library-wiki/models/TODO-TEMPLATE/).
-There, you will find installation instructions, usage information, and code
-examples for all supported languages.
+Additionally, Python-specific instructions and code examples are available
+[here](https://ntia.github.io/propagation-library-wiki/models/TODO-TEMPLATE/python).
 
 If you're a developer and would like to contribute to or extend this repository,
 please review the guide for contributors [here](CONTRIBUTING.md) or open an
