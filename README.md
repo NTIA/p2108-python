@@ -57,7 +57,7 @@ TODO-TEMPLATE: Update links in this section
 > The text below indicates this package is distributed on PyPi,
 > however it is not yet uploaded. A link will be provided here when available.
 
-This software is distributed on [PyPi](#) and is easily installable
+This software is distributed on [PyPI](#) and is easily installable
 using the following command.
 
 ```cmd
