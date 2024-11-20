@@ -42,8 +42,8 @@
 This code repository is a template repository for Python wrappers in the NTIA/ITS
 Propagation Library (PropLib). This template is intended for developers wishing
 to develop a cross-platform Python interface to a compiled C++ library as part of
-PropLib. Instructions on how to use this repository are found in its
-[GitHub Wiki](https://github.com/NTIA/proplib-template-python/wiki).
+PropLib. Instructions on how to use this repository are found in the
+[PropLib Template Wiki](https://github.com/NTIA/proplib-template/wiki).
 
 Additional template repositories exist for building the C++ base repository and the
 C#/.NET and MATLAB wrappers. See:
