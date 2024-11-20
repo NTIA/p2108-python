@@ -1,19 +1,18 @@
 # Recommendation ITU-R P.2108 - U.S. Reference Implementation, Python #
 
 [![NTIA/ITS PropLib][proplib-badge]][proplib-link]
-[![GitHub Release][gh-releases-badge]][gh-releases-link]
 [![GitHub Issues][gh-issues-badge]][gh-issues-link]
+<!-- [![PyPI Release][pypi-release-badge]][pypi-release-link] -->
+<!-- [![GitHub Actions Unit Test Status][gh-actions-test-badge]][gh-actions-test-link] -->
 
 [proplib-badge]: https://img.shields.io/badge/PropLib-badge?label=%F0%9F%87%BA%F0%9F%87%B8%20NTIA%2FITS&labelColor=162E51&color=D63E04
 [proplib-link]: https://ntia.github.io/propagation-library-wiki
-<!-- [gh-actions-test-badge]: https://img.shields.io/github/actions/workflow/status/NTIA/p2108-python/tox.yml?branch=main&logo=pytest&logoColor=ffffff&label=Build%2FTests&labelColor=162E51 -->
-<!-- [gh-actions-test-link]: https://github.com/NTIA/p2108-python/actions/workflows/tox.yml -->
-[gh-releases-badge]: https://img.shields.io/github/v/release/NTIA/p2108-python?logo=github&label=Release&labelColor=162E51&color=D63E04
-[gh-releases-link]: https://github.com/NTIA/p2108-python/releases
+[gh-actions-test-badge]: https://img.shields.io/github/actions/workflow/status/NTIA/p2108-python/tox.yml?branch=main&logo=pytest&logoColor=ffffff&label=Tests&labelColor=162E51
+[gh-actions-test-link]: https://github.com/NTIA/p2108-python/actions/workflows/tox.yml
+[pypi-release-badge]: https://img.shields.io/pypi/v/proplib-p2108?logo=pypi&logoColor=ffffff&label=Release&labelColor=162E51&color=D63E04
+[pypi-release-link]: https://pypi.org/project/proplib-p2108
 [gh-issues-badge]: https://img.shields.io/github/issues/NTIA/p2108-python?logo=github&label=Issues&labelColor=162E51
 [gh-issues-link]: https://github.com/NTIA/p2108-python/issues
-<!-- [doi-badge]: https://img.shields.io/badge/{TODO-TEMPLATE-ALL-VERSIONS-DOI}-x?logo=doi&logoColor=ffffff&labelColor=162E51&color=D63E04 -->
-<!-- [doi-link]: https://zenodo.org/badge/latestdoi/{TODO-TEMPLATE-REPOSITORY-ID} -->
 
 Python® wrapper for U.S. Reference Software Implementation of Recommendation ITU-R
 P.2108. This Recommendation contains three methods for the prediction of clutter
@@ -24,7 +23,11 @@ the Recommendation. This Python package wraps the
 
 ## Getting Started ##
 
-This software is distributed on [PyPi](https://pypi.org/project/p2108) and is easily installable
+> [!NOTE]
+> The text below indicates this package is distributed on PyPi,
+> however it is not yet uploaded. A link will be provided here when available.
+
+This software is distributed on [PyPI](#) and is easily installable
 using the following command.
 
 ```cmd
