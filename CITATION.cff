@@ -4,9 +4,8 @@ title: >-
 message: Please cite this software using these metadata.
 type: software
 authors:
-  - given-names: Anthony
+  - given-names: Anthony W.
     family-names: Romaniello
-    name-particle: W.
     email: aromaniello@ntia.gov
     affiliation: >-
       U.S. Department of Commerce, National
