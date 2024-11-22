@@ -1,4 +1,4 @@
-# Recommendation ITU-R P.2108 - U.S. Reference Implementation, Python #
+# Recommendation ITU-R P.2108 - Python Wrapper #
 
 [![NTIA/ITS PropLib][proplib-badge]][proplib-link]
 [![GitHub Issues][gh-issues-badge]][gh-issues-link]
