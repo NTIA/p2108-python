@@ -4,6 +4,7 @@
 [![GitHub Issues][gh-issues-badge]][gh-issues-link]
 <!-- [![PyPI Release][pypi-release-badge]][pypi-release-link] -->
 <!-- [![GitHub Actions Unit Test Status][gh-actions-test-badge]][gh-actions-test-link] -->
+[![DOI][doi-badge]][doi-link]
 
 [proplib-badge]: https://img.shields.io/badge/PropLib-badge?label=%F0%9F%87%BA%F0%9F%87%B8%20NTIA%2FITS&labelColor=162E51&color=D63E04
 [proplib-link]: https://ntia.github.io/propagation-library-wiki
@@ -13,12 +14,14 @@
 [pypi-release-link]: https://pypi.org/project/proplib-p2108
 [gh-issues-badge]: https://img.shields.io/github/issues/NTIA/p2108-python?logo=github&label=Issues&labelColor=162E51
 [gh-issues-link]: https://github.com/NTIA/p2108-python/issues
+[doi-badge]: https://zenodo.org/badge/804561453.svg
+[doi-link]: https://zenodo.org/badge/latestdoi/804561453
 
-Python® wrapper for U.S. Reference Software Implementation of Recommendation ITU-R
-P.2108. This Recommendation contains three methods for the prediction of clutter
-loss: Height Gain Terminal Correction Model, Terrestrial Statistical Model, and
-Aeronautical Statistical Model. The software implements Section 3 of Annex 1 of
-the Recommendation. This Python package wraps the
+This repository contains a Python® wrapper for the NTIA/ITS implementation of
+Recommendation ITU-R P.2108. This Recommendation contains three methods for the
+prediction of clutter loss: Height Gain Terminal Correction Model, Terrestrial
+Statistical Model, and Aeronautical Statistical Model. The software implements
+Section 3 of Annex 1 of the Recommendation. This Python package wraps the
 [base C++ implementation](https://github.com/NTIA/p2108).
 
 ## Getting Started ##
