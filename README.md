@@ -1,9 +1,9 @@
 # Recommendation ITU-R P.2108 - Python Wrapper #
 
 [![NTIA/ITS PropLib][proplib-badge]][proplib-link]
+[![PyPI Release][pypi-release-badge]][pypi-release-link]
 [![GitHub Issues][gh-issues-badge]][gh-issues-link]
-<!-- [![PyPI Release][pypi-release-badge]][pypi-release-link] -->
-<!-- [![GitHub Actions Unit Test Status][gh-actions-test-badge]][gh-actions-test-link] -->
+[![GitHub Actions Unit Test Status][gh-actions-test-badge]][gh-actions-test-link]
 [![DOI][doi-badge]][doi-link]
 
 [proplib-badge]: https://img.shields.io/badge/PropLib-badge?label=%F0%9F%87%BA%F0%9F%87%B8%20NTIA%2FITS&labelColor=162E51&color=D63E04
@@ -26,15 +26,11 @@ Section 3 of Annex 1 of the Recommendation. This Python package wraps the
 
 ## Getting Started ##
 
-> [!NOTE]
-> The text below indicates this package is distributed on PyPi,
-> however it is not yet uploaded. A link will be provided here when available.
-
-This software is distributed on [PyPI](#) and is easily installable
+This software is distributed on [PyPI](https://pypi.org/project/proplib-p2108) and is easily installable
 using the following command.
 
 ```cmd
-pip install p2108
+pip install proplib-p2108
 ```
 
 General information about using this model is available on
