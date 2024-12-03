@@ -1,36 +1,38 @@
 {
     "upload_type": "software",
-    "publication_date": "TODO-TEMPLATE",
-    "title": "TODO-TEMPLATE",
+    "publication_date": "2024-12-11",
+    "title": "Recommendation ITU-R P.2108, Python Wrapper",
     "creators": [
         {
-            "name": "TODO-TEMPLATE",
+            "name": "Romaniello, Anthony W.",
             "affiliation": "U.S. Department of Commerce, National Telecommunications and Information Administration, Institute for Telecommunication Sciences",
-            "orcid": "TODO-TEMPLATE"
+            "orcid": "0000-0001-8437-6504"
         }
     ],
     "description": "TODO-TEMPLATE. Make this the same as the abstract.",
     "access_right": "open",
     "keywords": [
-        "TODO-TEMPLATE",
-        "TODO-TEMPLATE"
+        "clutter",
+        "ITU",
+        "ITU-R",
+        "propagation"
     ],
     "related_identifiers": [
         {
-            "identifier": "https://github.com/NTIA/TODO-TEMPLATE",
+            "identifier": "https://github.com/NTIA/p2108",
             "relation": "isSupplementTo",
             "resource_type": "software"
         },
         {
-            "identifier": "https://github.com/NTIA/TODO-TEMPLATE-test-data",
+            "identifier": "https://github.com/NTIA/p2108-test-data",
             "relation": "isSupplementedBy",
             "resource_type": "dataset"
         },
         {
-            "identifier": "https://ntia.github.io/propagation-library-wiki/models/TODO-TEMPLATE/",
+            "identifier": "https://ntia.github.io/propagation-library-wiki/models/P2108/",
             "relation": "isDocumentedBy",
             "resource_type": "softwaredocumentation"
         }
     ],
-    "version": "TODO-TEMPLATE"
+    "version": "1.0.0"
 }
