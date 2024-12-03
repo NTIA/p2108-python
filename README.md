@@ -1,4 +1,4 @@
-# Recommendation ITU-R P.2108 - Python Wrapper #
+# Recommendation ITU-R P.2108 - Python® Wrapper #
 
 [![NTIA/ITS PropLib][proplib-badge]][proplib-link]
 [![PyPI Release][pypi-release-badge]][pypi-release-link]
@@ -17,12 +17,12 @@
 [doi-badge]: https://zenodo.org/badge/804561453.svg
 [doi-link]: https://zenodo.org/badge/latestdoi/804561453
 
-This repository contains a Python® wrapper for the NTIA/ITS implementation of
+This repository contains a Python wrapper for the NTIA/ITS implementation of
 Recommendation ITU-R P.2108. This Recommendation contains three methods for the
 prediction of clutter loss: Height Gain Terminal Correction Model, Terrestrial
 Statistical Model, and Aeronautical Statistical Model. The software implements
 Section 3 of Annex 1 of the Recommendation. This Python package wraps the
-[base C++ implementation](https://github.com/NTIA/p2108).
+[NTIA/ITS C++ implementation](https://github.com/NTIA/p2108).
 
 ## Getting Started ##
 
@@ -56,7 +56,7 @@ Below are the steps to build and install the Python package from the source code
 Working installations of Git and a [currently-supported version](https://devguide.python.org/versions/)
 of Python are required. Additional requirements exist if you want to compile the shared
 library from C++ source code; see relevant build instructions
-[here](https://github.com/NTIA/TODO-TEMPLATE?tab=readme-ov-file#configure-and-build).
+[here](https://github.com/NTIA/p2108?tab=readme-ov-file#configure-and-build).
 
 1. Optionally, configure and activate a virtual environment using a tool such as
 [`venv`](https://docs.python.org/3/library/venv.html) or
