@@ -1,7 +1,9 @@
-from .test_utils import ABSTOL__DB, read_csv_test_data
 import pytest
 
 from ITS.ITU.PSeries import P2108
+
+from .test_utils import ABSTOL__DB, read_csv_test_data
+
 
 @pytest.mark.parametrize(
     "inputs,rtn,expected",
