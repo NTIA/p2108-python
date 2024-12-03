@@ -7,9 +7,8 @@ import pytest
 # TODO-TEMPLATE: Import the python wrapper package
 from ITS import PropLibTemplate
 
-# Test data is expected to exist in parent repository
-# (i.e., that this Python wrapper repo is cloned as a submodule of the base repo)
-TEST_DATA_DIR = (Path(__file__).parent.parent.parent.parent / "tests") / "data"
+# Test data is expected to exist in extern/<TODO-TEMPLATE>-test-data
+TEST_DATA_DIR = (Path(__file__).parent.parent / "extern") / "TODO-TEMPLATE"
 ABSTOL__DB = 0.1  # Absolute tolerance, in dB, to ensure outputs match expected value
 
 
