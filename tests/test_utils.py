@@ -1,8 +1,8 @@
 import csv
 from pathlib import Path
 
-# Test data is expected to exist in extern/TODO-TEMPLATE-test-data
-TEST_DATA_DIR = (Path(__file__).parent.parent / "extern") / "TODO-TEMPLATE"
+# Test data is expected to exist in tests/data
+TEST_DATA_DIR = Path(__file__).parent / "data"
 ABSTOL__DB = 0.1  # Absolute tolerance, in dB, to ensure outputs match expected value
 
 
