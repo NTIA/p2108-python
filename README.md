@@ -52,42 +52,37 @@ this either from the
 compiling it yourself from the C++ source code. Either way, ensure that the shared library
 (`.dll`, `.dylib`, or `.so` file) is placed in `src/ITS/ITU/PSeries/P2108/`, alongside `__init__.py`.
 
-Below are the steps to build and install the Python package from source, including
-compiling the library from the C++ source code. Working installations of Git and
-Python (3.9 or above) are required. If compiling the shared library, CMake and a C++ compiler
-are also required.
+Below are the steps to build and install the Python package from the source code.
+Working installations of Git and a [currently-supported version](https://devguide.python.org/versions/)
+of Python are required. Additional requirements exist if you want to compile the shared
+library from C++ source code; see relevant build instructions
+[here](https://github.com/NTIA/TODO-TEMPLATE?tab=readme-ov-file#configure-and-build).
 
-1. Clone the parent repository, then initialize the Git submodule containing the
-Python wrapper. This repository structure makes test data available to the Python
-wrapper.
+1. Optionally, configure and activate a virtual environment using a tool such as
+[`venv`](https://docs.python.org/3/library/venv.html) or
+[conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html).
+
+1. Clone this repository, then initialize the Git submodule containing the test data.
 
     ```cmd
-    # Clone the parent repository
-    git clone https://github.com/NTIA/p2108
-    cd p2108
+    # Clone the repository
+    git clone https://github.com/NTIA/p2108-python
+    cd p2108-python
 
-    # Initialize Git submodules (wrappers and external dependencies)
+    # Initialize Git submodule containing test data
     git submodule init
 
-    # Clone the submodules
+    # Clone the submodule
     git submodule update
     ```
 
-1. Compile the C++ library for your platform, following instructions
-[here](https://github.com/NTIA/p2108?tab=readme-ov-file#configure-and-build).
-Following these instructions should automatically copy the shared library
-into the location required by the Python wrapper.
+1. Download the shared library (`.dll`, `.so`, or `.dylib`) from a
+[GitHub Release](https://github.com/NTIA/p2108/releases). Then place the
+downloaded file in `src/ITS/ITU/PSeries/P2108/` (alongside `__init__.py`).
 
-    **OR**
-
-    Download the shared library (`.dll`, `.so`, or `.dylib`) from a
-    [GitHub Release](https://github.com/NTIA/p2108/releases). Then place the'
-    downloaded file in `src/ITS/ITU/PSeries/P2108/` (alongside `__init__.py`).
-
-1. Install the local package and development dependencies:
+1. Install the local package and development dependencies into your current environment:
 
     ```cmd
-    cd wrap/python
     pip install .[dev]
     ```
 
@@ -99,11 +94,9 @@ into the location required by the Python wrapper.
 
 ### Running Tests ###
 
-Python unit tests can be run to confirm successful installation. Test data is
-expected to be located in the parent repository. Therefore, if you haven't cloned
-this repository as a submodule (as described above), you will need to first specify
-the location of the test data files in `tests/test_p2108.py` (using the `TEST_DATA_DIR`
-variable). Then, run the tests with pytest:
+Python unit tests can be run to confirm successful installation. You will need to
+clone this repository's test data submodule (as described above). Then, run the tests
+with pytest using the following command.
 
 ```cmd
 pytest
