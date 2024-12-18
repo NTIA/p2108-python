@@ -10,7 +10,6 @@
         }
     ],
     "description": "This repository contains a Python wrapper for the NTIA/ITS implementation of Recommendation ITU-R P.2108. This Recommendation contains three methods for the prediction of clutter loss: Height Gain Terminal Correction Model, Terrestrial Statistical Model, and Aeronautical Statistical Model. The software implements Section 3 of Annex 1 of the Recommendation. This Python package wraps the NTIA/ITS C++ implementation.",
-    "access_right": "open",
     "keywords": [
         "clutter",
         "ITU",

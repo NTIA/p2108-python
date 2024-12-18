@@ -113,6 +113,16 @@ contains an extensive set of example values which are useful as validation cases
 - [Recommendation ITU-R P.2108](https://www.itu.int/rec/R-REC-P.2108/en)
 - [Report ITU-R P.2402](https://www.itu.int/pub/R-REP-P.2402)
 
+## License ##
+
+See [LICENSE](./LICENSE.md).
+
+"Python" and the Python logos are trademarks or registered trademarks of the Python Software Foundation, used by the National Telecommunications and Information Administration with permission from the Foundation.
+
 ## Contact ##
 
 For technical questions, contact <code@ntia.gov>.
+
+## Disclaimer ##
+
+Certain commercial equipment, instruments, or materials are identified in this project were used for the convenience of the developers. In no case does such identification imply recommendation or endorsement by the National Telecommunications and Information Administration, nor does it imply that the material or equipment identified is necessarily the best available for the purpose.
