@@ -2,8 +2,8 @@
 
 [![NTIA/ITS PropLib][proplib-badge]][proplib-link]
 [![PyPI Release][pypi-release-badge]][pypi-release-link]
-[![GitHub Issues][gh-issues-badge]][gh-issues-link]
 [![GitHub Actions Unit Test Status][gh-actions-test-badge]][gh-actions-test-link]
+[![GitHub Issues][gh-issues-badge]][gh-issues-link]
 [![DOI][doi-badge]][doi-link]
 
 [proplib-badge]: https://img.shields.io/badge/PropLib-badge?label=%F0%9F%87%BA%F0%9F%87%B8%20NTIA%2FITS&labelColor=162E51&color=D63E04
