@@ -31,13 +31,17 @@ jobs:
             os-runner: 'windows-latest'
             arch-id: 'x64'
             release-file-pattern: '*-x64.dll'
+          - os-name: 'Windows (32-bit)'
+            os-runner: 'windows-latest'
+            arch-id: 'x86'
+            release-file-pattern: '*-x86.dll'
           - os-name: 'macOS'
             os-runner: 'macos-latest'
-            arch-id: 'universal'
+            arch-id: 'arm64'
             release-file-pattern: '*.dylib'
           - os-name: 'Linux (Ubuntu)'
             os-runner: 'ubuntu-latest'
-            arch-id: 'x86_64'
+            arch-id: 'x64'
             release-file-pattern: '*.so'
         py:    # Python versions to test
           - "3.9"
@@ -50,6 +54,7 @@ jobs:
           with:
             submodules: true
 
+        # Cache key is unique to the combination of runner OS + architecture (matrix.arch-id) + release tag
         - name: Restore ${{ env.LIBRARY_RELEASE_TAG }} binaries from cache if available
           id: cache-restore
           uses: actions/cache@v4
@@ -73,6 +78,7 @@ jobs:
         - name: Set up Python ${{ matrix.py }}
           uses: actions/setup-python@v5
           with:
+            architecture: ${{ matrix.platform.arch-id }}
             python-version: ${{ matrix.py }}
             cache: 'pip'
 
