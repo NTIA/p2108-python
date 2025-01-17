@@ -27,7 +27,6 @@ concurrency:
 env:
     LIBRARY_RELEASE_TAG: v1.0-rc.1
     LIBRARY_DESTINATION_DIRECTORY: 'src/ITS/ITU/PSeries/P2108/'
-    PYTHON_VERSIONS: "['3.9', '3.10', '3.11', '3.12']"
 
 jobs:
   run-all-tests:
@@ -36,20 +35,28 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        os: ['windows-latest', 'macos-latest', 'ubuntu-latest']
+        release-files: ['*-x64.dll', '*-x86.dll', '*.dylib', '*.so']
+        # arch: ['32-bit', '64-bit']
         py:
           - "3.9"
           - "3.10"
           - "3.11"
           - "3.12"
-        include:
-            - os: windows-latest
-              release-files: '*-x64.dll'
-            - os: windows-latest
-              release-files: '*-x86.dll'
-            - os: macos-latest
-              release-files: '*.dylib'
-            - os: ubuntu-latest
-              release-files: '*.so'
+        exclude:
+          - os: windows-latest
+            release-files: ['*.dylib', '*.so']
+          - os: macos-latest
+          - os: ubuntu-latest
+        # include:
+        #   - os: windows-latest
+        #     release-files: '*-x64.dll'
+        #   - os: windows-latest
+        #     release-files: '*-x86.dll'
+        #   - os: macos-latest
+        #     release-files: '*.dylib'
+        #   - os: ubuntu-latest
+        #     release-files: '*.so'
     steps:
         - name: Check out repository
           uses: actions/checkout@v4
