@@ -2,7 +2,8 @@ import csv
 from pathlib import Path
 
 # Test data is expected to exist in tests/data
-TEST_DATA_DIR = Path(__file__).parent / "data"
+# TODO-TEMPLATE: Remove the '#' in the line below after adding your test data submodule
+TEST_DATA_DIR = Path(__file__).parent  # / "data"
 ABSTOL__DB = 0.1  # Absolute tolerance, in dB, to ensure outputs match expected value
 
 # Check if test data directory exists and is not empty

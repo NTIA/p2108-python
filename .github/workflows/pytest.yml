@@ -47,7 +47,7 @@ jobs:
             os-runner: 'ubuntu-latest'
             arch-id: 'x64'
             release-file-pattern: '*.so'
-        py:    # Python versions to test
+        py:    # Python versions to test on all platforms
           - "3.9"
           - "3.10"
           - "3.11"
