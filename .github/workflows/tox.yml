@@ -27,6 +27,7 @@ concurrency:
 env:
     LIBRARY_RELEASE_TAG: v1.0-rc.1
     LIBRARY_DESTINATION_DIRECTORY: 'src/ITS/ITU/PSeries/P2108/'
+    PYTHON_VERSIONS: "['3.9', '3.10', '3.11', '3.12']"
 
 jobs:
   run-all-tests:
@@ -38,14 +39,15 @@ jobs:
         include:
             - os: windows-latest
               release-files: '*-x64.dll'
+              py: $PYTHON_VERSIONS
             # - os: windows-latest
             #   release-files: '*-x86.dll'
             - os: macos-latest
               release-files: '*.dylib'
             - os: ubuntu-latest
               release-files: '*.so'
-        py:
-          - "3.9"
+        # py:
+          # - "3.9"
         #   - "3.10"
         #   - "3.11"
         #   - "3.12"
@@ -70,9 +72,6 @@ jobs:
             tarBall: false
             zipBall: false
             out-file-path: ${{ env.LIBRARY_DESTINATION_DIRECTORY }}
-        - name: TEMP check downloaded files
-          if: ${{ runner.os != 'Windows' }}
-          run: ls $LIBRARY_DESTINATION_DIRECTORY
         - name: Set up Python ${{ matrix.py }}
           uses: actions/setup-python@v5
           with:
