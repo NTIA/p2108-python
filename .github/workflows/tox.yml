@@ -72,7 +72,7 @@ jobs:
             out-file-path: ${{ env.LIBRARY_DESTINATION_DIRECTORY }}
         - name: TEMP check downloaded files
           if: ${{ runner.os != 'Windows' }}
-          run: ls $env:LIBRARY_DESTINATION_DIRECTORY
+          run: ls $LIBRARY_DESTINATION_DIRECTORY
         - name: Set up Python ${{ matrix.py }}
           uses: actions/setup-python@v5
           with:
