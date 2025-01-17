@@ -30,54 +30,60 @@ env:
 
 jobs:
   run-all-tests:
-    name: Py${{ matrix.py }} / ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os[0] }} (${{ matrix.arch[0] }}) / Py${{ matrix.py }}
+    runs-on: ${{ matrix.os[1] }}
     strategy:
       fail-fast: false
       matrix:
-        os: ['windows-latest', 'macos-latest', 'ubuntu-latest']
-        release-files: ['*-x64.dll', '*-x86.dll', '*.dylib', '*.so']
-        # arch: ['32-bit', '64-bit']
-        py:
+        os:    # OS: ["nicely formatted name", "GitHub runner name"]
+          - ['Windows', 'windows-latest']
+          - ['macOS', 'macos-latest']
+          - ['Linux', ubuntu-latest']
+        arch:  # Architecture: ["name", "file pattern to grab from release"]
+          - ['x64', '-x64.dll']       # Windows 32-bit
+          - ['universal', '*.dylib']  # macOS Universal
+          - ['x86_64', '*.so']        # Linux x86_64
+        py:    # Python versions; should exist in pyproject.toml [tool.tox.gh.python]
           - "3.9"
           - "3.10"
           - "3.11"
           - "3.12"
-        exclude:
+        exclude:  # Exclude all matrix combinations
+          - os: ['Windows', 'windows-latest']
+          - os: ['macOS', 'macos-latest']
+          - os: ['Linux', ubuntu-latest']
+        include:  # Selectively include desired OS/architecture combinations
           - os: windows-latest
-            release-files: ['*.dylib', '*.so']
-          - os: macos-latest
-          - os: ubuntu-latest
-        # include:
-        #   - os: windows-latest
-        #     release-files: '*-x64.dll'
-        #   - os: windows-latest
-        #     release-files: '*-x86.dll'
-        #   - os: macos-latest
-        #     release-files: '*.dylib'
-        #   - os: ubuntu-latest
-        #     release-files: '*.so'
+            arch: ['x64', '-x64.dll']
+          # - os: macos-latest
+          #   arch: ['universal', '*.dylib']
+          # - os: ubuntu-latest
+          #   arch: ['x86-64', '*.so']
+
     steps:
         - name: Check out repository
           uses: actions/checkout@v4
           with:
             submodules: true
+
         - name: Restore ${{ env.LIBRARY_RELEASE_TAG }} binaries from cache if available
           id: cache-restore
           uses: actions/cache@v4
           with:
-            key: ${{ runner.os }}-${{ env.LIBRARY_RELEASE_TAG }}
-            path: ${{ env.LIBRARY_DESTINATION_DIRECTORY}}/${{ matrix.release-files }}
+            key: ${{ runner.os }}-${{ matrix.arch[0] }}-${{ env.LIBRARY_RELEASE_TAG }}
+            path: ${{ env.LIBRARY_DESTINATION_DIRECTORY}}/${{ matrix.arch[1] }}
+
         - name: Download required ${{ env.LIBRARY_RELEASE_TAG }} binaries
           if: ${{ steps.cache-restore.outputs.cache-hit != 'true' }}
           uses: robinraju/release-downloader@v1
           with:
             repository: 'NTIA/p2108'
             tag: ${{ env.LIBRARY_RELEASE_TAG }}
-            fileName: '${{ matrix.release-files }}'
+            fileName: '${{ matrix.arch[1] }}'
             tarBall: false
             zipBall: false
             out-file-path: ${{ env.LIBRARY_DESTINATION_DIRECTORY }}
+
         - name: Set up Python ${{ matrix.py }}
           uses: actions/setup-python@v5
           with:
