@@ -30,36 +30,29 @@ env:
 
 jobs:
   run-all-tests:
-    name: ${{ matrix.os[0] }} (${{ matrix.arch[0] }}) / Py${{ matrix.py }}
-    runs-on: ${{ matrix.os[1] }}
+    name: ${{ matrix.platform.os-name }} / Py${{ matrix.py }}
+    runs-on: ${{ matrix.platform.os-runner }}
     strategy:
       fail-fast: false
       matrix:
-        os:    # OS: ["nicely formatted name", "GitHub runner name"]
-          - ['Windows', 'windows-latest']
-          - ['macOS', 'macos-latest']
-          - ['Linux', ubuntu-latest']
-        arch:  # Architecture: ["name", "file pattern to grab from release"]
-          - ['x64', '-x64.dll']       # Windows 32-bit
-          - ['universal', '*.dylib']  # macOS Universal
-          - ['x86_64', '*.so']        # Linux x86_64
+        platform:
+          - os-name: 'Windows (64-bit)'
+            os-runner: 'windows-latest'
+            arch-id: 'x64'
+            release-file-pattern: '*-x64.dll'
+          - os-name: 'macOS'
+            os-runner: 'macos-latest'
+            arch-id: 'universal'
+            release-file-pattern: '*.dylib'
+          - os-name: 'Linux (Ubuntu)'
+            os-runner: 'ubuntu-latest'
+            arch-id: 'x86_64'
+            release-file-pattern: '*.so'
         py:    # Python versions; should exist in pyproject.toml [tool.tox.gh.python]
           - "3.9"
           - "3.10"
           - "3.11"
           - "3.12"
-        exclude:  # Exclude all matrix combinations
-          - os: ['Windows', 'windows-latest']
-          - os: ['macOS', 'macos-latest']
-          - os: ['Linux', ubuntu-latest']
-        include:  # Selectively include desired OS/architecture combinations
-          - os: windows-latest
-            arch: ['x64', '-x64.dll']
-          # - os: macos-latest
-          #   arch: ['universal', '*.dylib']
-          # - os: ubuntu-latest
-          #   arch: ['x86-64', '*.so']
-
     steps:
         - name: Check out repository
           uses: actions/checkout@v4
@@ -70,8 +63,8 @@ jobs:
           id: cache-restore
           uses: actions/cache@v4
           with:
-            key: ${{ runner.os }}-${{ matrix.arch[0] }}-${{ env.LIBRARY_RELEASE_TAG }}
-            path: ${{ env.LIBRARY_DESTINATION_DIRECTORY}}/${{ matrix.arch[1] }}
+            key: ${{ runner.os }}-${{ matrix.platform.arch-id }}-${{ env.LIBRARY_RELEASE_TAG }}
+            path: ${{ env.LIBRARY_DESTINATION_DIRECTORY}}/${{ matrix.platform.release-file-pattern }}
 
         - name: Download required ${{ env.LIBRARY_RELEASE_TAG }} binaries
           if: ${{ steps.cache-restore.outputs.cache-hit != 'true' }}
@@ -79,7 +72,7 @@ jobs:
           with:
             repository: 'NTIA/p2108'
             tag: ${{ env.LIBRARY_RELEASE_TAG }}
-            fileName: '${{ matrix.arch[1] }}'
+            fileName: '${{ matrix.platform.release-file-pattern }}'
             tarBall: false
             zipBall: false
             out-file-path: ${{ env.LIBRARY_DESTINATION_DIRECTORY }}
