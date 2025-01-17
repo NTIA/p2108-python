@@ -6,6 +6,3 @@ __version__ = "1.0.0"
 # from .proplib_template import (
 
 # )
-
-# TODO-TEMPLATE: Put the name of the module here
-__all__ = ["proplib_template"]
