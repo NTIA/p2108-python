@@ -65,11 +65,11 @@ jobs:
           uses: robinraju/release-downloader@v1
           with:
             repository: 'NTIA/p2108'
-            tag: '$LIBRARY_RELEASE_TAG'
+            tag: ${{ env.LIBRARY_RELEASE_TAG }}
             fileName: '${{ matrix.release-files }}'
             tarBall: false
             zipBall: false
-            out-file-path: '$LIBRARY_DESTINATION_DIRECTORY'
+            out-file-path: ${{ env.LIBRARY_DESTINATION_DIRECTORY }}
         - name: TEMP check downloaded files
           if: ${{ runner.os != 'Windows' }}
           run: ls $env:LIBRARY_DESTINATION_DIRECTORY
