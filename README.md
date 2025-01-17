@@ -7,7 +7,7 @@
     - Make sure to update the [pypi-release-badge] and [pypi-release-link] URLs with
       your package name on PyPI (NOT the repository name on GitHub!)
     - This can only be added once there is a published version of the package on PyPI
-- The third badge is the Tox GitHub actions status.
+- The third badge is the pytest GitHub actions status.
     - Update the repository name in [gh-actions-test-badge] and [gh-actions-test-link]
 - The fourth badge displays open GitHub Issues
     - Update the repository name in [gh-issues-badge]
@@ -27,8 +27,8 @@
 -->
 [proplib-badge]: https://img.shields.io/badge/PropLib-badge?label=%F0%9F%87%BA%F0%9F%87%B8%20NTIA%2FITS&labelColor=162E51&color=D63E04
 [proplib-link]: https://ntia.github.io/propagation-library-wiki
-[gh-actions-test-badge]: https://img.shields.io/github/actions/workflow/status/NTIA/TODO-TEMPLATE/tox.yml?branch=main&logo=pytest&logoColor=ffffff&label=Tests&labelColor=162E51
-[gh-actions-test-link]: https://github.com/NTIA/TODO-TEMPLATE/actions/workflows/tox.yml
+[gh-actions-test-badge]: https://img.shields.io/github/actions/workflow/status/NTIA/TODO-TEMPLATE/pytest.yml?branch=main&logo=pytest&logoColor=ffffff&label=Tests&labelColor=162E51
+[gh-actions-test-link]: https://github.com/NTIA/TODO-TEMPLATE/actions/workflows/pytest.yml
 [pypi-release-badge]: https://img.shields.io/pypi/v/TODO-TEMPLATE?logo=pypi&logoColor=ffffff&label=Release&labelColor=162E51&color=D63E04
 [pypi-release-link]: https://pypi.org/project/TODO-TEMPLATE
 [gh-issues-badge]: https://img.shields.io/github/issues/NTIA/TODO-TEMPLATE?logo=github&label=Issues&labelColor=162E51
