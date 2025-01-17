@@ -42,3 +42,7 @@ def test_TerrestrialStatisticalModel(inputs, rtn, expected):
     else:
         with pytest.raises(RuntimeError):
             P2108.TerrestrialStatisticalModel(*inputs)
+
+
+def test_ShouldFail():
+    assert False
