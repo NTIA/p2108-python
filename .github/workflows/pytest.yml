@@ -1,4 +1,4 @@
-name: pytest
+name: Test with pytest
 
 on:
   workflow_dispatch:
@@ -16,6 +16,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
+    LIBRARY_BASE_REPO: NTIA/p2108
     LIBRARY_RELEASE_TAG: v1.0-rc.1
     LIBRARY_DESTINATION_DIRECTORY: 'src/ITS/ITU/PSeries/P2108/'
 
@@ -50,20 +51,19 @@ jobs:
           with:
             submodules: true
 
-        - name: Restore ${{ env.LIBRARY_RELEASE_TAG }} binaries from cache if available
-          id: cache-restore
-          uses: actions/cache@v4
-          with:
-            key: ${{ runner.os }}-${{ matrix.platform.arch-id }}-${{ env.LIBRARY_RELEASE_TAG }}
-            path: ${{ env.LIBRARY_DESTINATION_DIRECTORY}}/${{ matrix.platform.release-file-pattern }}
+        # - name: Restore ${{ env.LIBRARY_RELEASE_TAG }} binaries from cache if available
+        #   id: cache-restore
+        #   uses: actions/cache@v4
+        #   with:
+        #     key: ${{ runner.os }}-${{ matrix.platform.arch-id }}-${{ env.LIBRARY_RELEASE_TAG }}
+        #     path: ${{ env.LIBRARY_DESTINATION_DIRECTORY}}/${{ matrix.platform.release-file-pattern }}
 
         - name: Download required ${{ env.LIBRARY_RELEASE_TAG }} binaries
-          if: ${{ steps.cache-restore.outputs.cache-hit != 'true' }}
           uses: robinraju/release-downloader@v1
           with:
-            repository: 'NTIA/p2108'
+            repository: ${{ env.LIBRARY_BASE_REPO }}
             tag: ${{ env.LIBRARY_RELEASE_TAG }}
-            fileName: '${{ matrix.platform.release-file-pattern }}'
+            fileName: '*.dll,*.so,*.dylib'
             tarBall: false
             zipBall: false
             out-file-path: ${{ env.LIBRARY_DESTINATION_DIRECTORY }}
