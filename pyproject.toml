@@ -74,7 +74,7 @@ test-requires = "pytest"
 [tool.tox]
 min_version = "4.21.1"
 env_list = ["3.9", "3.10", "3.11", "3.12", "3.13"]
-skip_missing_interpreters = true                   # TODO override this in GHA
+skip_missing_interpreters = true
 
 [tool.tox.env.testenv]
 description = "Run tests with pytest and generate coverage report"

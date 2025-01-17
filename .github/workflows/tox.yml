@@ -1,0 +1,88 @@
+name: Tox
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - dev
+      - pre-publish-revisions # TESTING
+    paths:
+      - src
+      - tests
+      - pyproject.toml
+      - .github\workflows\tox.yml
+  pull_request:
+    branches:
+      - main
+    paths:
+      - src
+      - tests
+      - pyproject.toml
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
+
+env:
+    LIBRARY_RELEASE_TAG: v1.0-rc.1
+    LIBRARY_DESTINATION_DIRECTORY: 'src/ITS/ITU/PSeries/P2108/'
+
+jobs:
+  run-all-tests:
+    name: Py${{ matrix.py }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+            - os: windows-latest
+              release-files: '*-x64.dll'
+            # - os: windows-latest
+            #   release-files: '*-x86.dll'
+            - os: macos-latest
+              release-files: '*.dylib'
+            - os: ubuntu-latest
+              release-files: '*.so'
+        py:
+          - "3.9"
+        #   - "3.10"
+        #   - "3.11"
+        #   - "3.12"
+    steps:
+        - name: Check out repository
+          uses: actions/checkout@v4
+          with:
+            submodules: true
+        - name: Restore ${{ env.LIBRARY_RELEASE_TAG }} binaries from cache if available
+          id: cache-restore
+          uses: actions/cache@v4
+          with:
+            key: ${{ runner.os }}-${{ env.LIBRARY_RELEASE_TAG }}
+            path: ${{ env.LIBRARY_DESTINATION_DIRECTORY}}/${{ matrix.release-files }}
+        - name: Download required ${{ env.LIBRARY_RELEASE_TAG }} binaries
+          if: ${{ steps.cache-restore.outputs.cache-hit != 'true' }}
+          uses: robinraju/release-downloader@v1
+          with:
+            repository: 'NTIA/p2108'
+            tag: '$LIBRARY_RELEASE_TAG'
+            fileName: '${{ matrix.release-files }}'
+            tarBall: false
+            zipBall: false
+            out-file-path: '$LIBRARY_DESTINATION_DIRECTORY'
+        - name: TEMP check downloaded files
+          if: ${{ runner.os != 'Windows' }}
+          run: ls $env:LIBRARY_DESTINATION_DIRECTORY
+        - name: Set up Python ${{ matrix.py }}
+          uses: actions/setup-python@v5
+          with:
+            python-version: ${{ matrix.py }}
+            cache: 'pip'
+        - name: Install tox-gh
+          run: python -m pip install tox-gh
+        - name: Set up test suite
+          run: tox r -vv --notest --skip-missing-interpreters false
+        - name: Run test suite
+          run: tox r --skip-pkg-install
+          env:
+            PYTEST_ADDOPTS: "-vv --durations=0"
