@@ -2,13 +2,15 @@ name: Validate CITATION.cff
 
 on:
   push:
+    branches: ["main", "dev"]
     paths:
-      - CITATION.cff
-      - .github/workflows/cff-validator.yml
+      - 'CITATION.cff'
+      - '.github/workflows/cff-validator.yml'
   pull_request:
+    branches: ["main", "dev"]
     paths:
-      - CITATION.cff
-      - .github/workflows/cff-validator.yml
+      - 'CITATION.cff'
+      - '.github/workflows/cff-validator.yml'
   workflow_dispatch:
 
 jobs:
@@ -22,4 +24,4 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Validate CITATION.cff
-        uses: dieghernan/cff-validator@v3
+        uses: dieghernan/cff-validator@v4

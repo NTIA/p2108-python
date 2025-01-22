@@ -45,7 +45,6 @@ classifiers = [
 tests = [
     "pytest>=8.2.0,<9.0",
     "pytest-cov>=6.0.0,<7.0",
-    "tox>=4.23.2,<5.0",         # Keep in sync with tox.ini minimum_version
 ]
 dev = [
     "hatchling>=1.25.0,<2.0",
@@ -53,6 +52,7 @@ dev = [
     "P2108[tests]",
 ]
 [project.urls]
+"PropLib Wiki" = "https://ntia.github.io/propagation-library-wiki/models/P2108/"
 "Python Wrapper Source" = "https://github.com/NTIA/p2108-python"
 "Python Wrapper Bug Tracker" = "https://github.com/NTIA/p2108-python/issues"
 "C++ Source" = "https://github.com/NTIA/p2108"
