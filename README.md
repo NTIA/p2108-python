@@ -1,34 +1,36 @@
-# Recommendation ITU-R P.2108 - U.S. Reference Implementation, Python #
+# Recommendation ITU-R P.2108 - Python® Wrapper #
 
 [![NTIA/ITS PropLib][proplib-badge]][proplib-link]
-[![GitHub Release][gh-releases-badge]][gh-releases-link]
+[![PyPI Release][pypi-release-badge]][pypi-release-link]
+[![GitHub Actions Unit Test Status][gh-actions-test-badge]][gh-actions-test-link]
 [![GitHub Issues][gh-issues-badge]][gh-issues-link]
+[![DOI][doi-badge]][doi-link]
 
 [proplib-badge]: https://img.shields.io/badge/PropLib-badge?label=%F0%9F%87%BA%F0%9F%87%B8%20NTIA%2FITS&labelColor=162E51&color=D63E04
 [proplib-link]: https://ntia.github.io/propagation-library-wiki
-<!-- [gh-actions-test-badge]: https://img.shields.io/github/actions/workflow/status/NTIA/p2108-python/tox.yml?branch=main&logo=pytest&logoColor=ffffff&label=Build%2FTests&labelColor=162E51 -->
-<!-- [gh-actions-test-link]: https://github.com/NTIA/p2108-python/actions/workflows/tox.yml -->
-[gh-releases-badge]: https://img.shields.io/github/v/release/NTIA/p2108-python?logo=github&label=Release&labelColor=162E51&color=D63E04
-[gh-releases-link]: https://github.com/NTIA/p2108-python/releases
+[gh-actions-test-badge]: https://img.shields.io/github/actions/workflow/status/NTIA/p2108-python/pytest.yml?branch=main&logo=pytest&logoColor=ffffff&label=Tests&labelColor=162E51
+[gh-actions-test-link]: https://github.com/NTIA/p2108-python/actions/workflows/pytest.yml
+[pypi-release-badge]: https://img.shields.io/pypi/v/proplib-p2108?logo=pypi&logoColor=ffffff&label=Release&labelColor=162E51&color=D63E04
+[pypi-release-link]: https://pypi.org/project/proplib-p2108
 [gh-issues-badge]: https://img.shields.io/github/issues/NTIA/p2108-python?logo=github&label=Issues&labelColor=162E51
 [gh-issues-link]: https://github.com/NTIA/p2108-python/issues
-<!-- [doi-badge]: https://img.shields.io/badge/{TODO-TEMPLATE-ALL-VERSIONS-DOI}-x?logo=doi&logoColor=ffffff&labelColor=162E51&color=D63E04 -->
-<!-- [doi-link]: https://zenodo.org/badge/latestdoi/{TODO-TEMPLATE-REPOSITORY-ID} -->
+[doi-badge]: https://zenodo.org/badge/804561453.svg
+[doi-link]: https://zenodo.org/badge/latestdoi/804561453
 
-Python® wrapper for U.S. Reference Software Implementation of Recommendation ITU-R
-P.2108. This Recommendation contains three methods for the prediction of clutter
-loss: Height Gain Terminal Correction Model, Terrestrial Statistical Model, and
-Aeronautical Statistical Model. The software implements Section 3 of Annex 1 of
-the Recommendation. This Python package wraps the
-[base C++ implementation](https://github.com/NTIA/p2108).
+This repository contains a Python wrapper for the NTIA/ITS implementation of
+Recommendation ITU-R P.2108. This Recommendation contains three methods for the
+prediction of clutter loss: Height Gain Terminal Correction Model, Terrestrial
+Statistical Model, and Aeronautical Statistical Model. The software implements
+Section 3 of Annex 1 of the Recommendation. This Python package wraps the
+[NTIA/ITS C++ implementation](https://github.com/NTIA/p2108).
 
 ## Getting Started ##
 
-This software is distributed on [PyPi](https://pypi.org/project/p2108) and is easily installable
+This software is distributed on [PyPI](https://pypi.org/project/proplib-p2108) and is easily installable
 using the following command.
 
 ```cmd
-pip install p2108
+pip install proplib-p2108
 ```
 
 General information about using this model is available on
@@ -50,42 +52,37 @@ this either from the
 compiling it yourself from the C++ source code. Either way, ensure that the shared library
 (`.dll`, `.dylib`, or `.so` file) is placed in `src/ITS/ITU/PSeries/P2108/`, alongside `__init__.py`.
 
-Below are the steps to build and install the Python package from source, including
-compiling the library from the C++ source code. Working installations of Git and
-Python (3.9 or above) are required. If compiling the shared library, CMake and a C++ compiler
-are also required.
+Below are the steps to build and install the Python package from the source code.
+Working installations of Git and a [currently-supported version](https://devguide.python.org/versions/)
+of Python are required. Additional requirements exist if you want to compile the shared
+library from C++ source code; see relevant build instructions
+[here](https://github.com/NTIA/p2108?tab=readme-ov-file#configure-and-build).
 
-1. Clone the parent repository, then initialize the Git submodule containing the
-Python wrapper. This repository structure makes test data available to the Python
-wrapper.
+1. Optionally, configure and activate a virtual environment using a tool such as
+[`venv`](https://docs.python.org/3/library/venv.html) or
+[conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html).
+
+1. Clone this repository, then initialize the Git submodule containing the test data.
 
     ```cmd
-    # Clone the parent repository
-    git clone https://github.com/NTIA/p2108
-    cd p2108
+    # Clone the repository
+    git clone https://github.com/NTIA/p2108-python
+    cd p2108-python
 
-    # Initialize Git submodules (wrappers and external dependencies)
+    # Initialize Git submodule containing test data
     git submodule init
 
-    # Clone the submodules
+    # Clone the submodule
     git submodule update
     ```
 
-1. Compile the C++ library for your platform, following instructions
-[here](https://github.com/NTIA/p2108?tab=readme-ov-file#configure-and-build).
-Following these instructions should automatically copy the shared library
-into the location required by the Python wrapper.
+1. Download the shared library (`.dll`, `.so`, or `.dylib`) from a
+[GitHub Release](https://github.com/NTIA/p2108/releases). Then place the
+downloaded file in `src/ITS/ITU/PSeries/P2108/` (alongside `__init__.py`).
 
-    **OR**
-
-    Download the shared library (`.dll`, `.so`, or `.dylib`) from a
-    [GitHub Release](https://github.com/NTIA/p2108/releases). Then place the'
-    downloaded file in `src/ITS/ITU/PSeries/P2108/` (alongside `__init__.py`).
-
-1. Install the local package and development dependencies:
+1. Install the local package and development dependencies into your current environment:
 
     ```cmd
-    cd wrap/python
     pip install .[dev]
     ```
 
@@ -97,11 +94,9 @@ into the location required by the Python wrapper.
 
 ### Running Tests ###
 
-Python unit tests can be run to confirm successful installation. Test data is
-expected to be located in the parent repository. Therefore, if you haven't cloned
-this repository as a submodule (as described above), you will need to first specify
-the location of the test data files in `tests/test_p2108.py` (using the `TEST_DATA_DIR`
-variable). Then, run the tests with pytest:
+Python unit tests can be run to confirm successful installation. You will need to
+clone this repository's test data submodule (as described above). Then, run the tests
+with pytest using the following command.
 
 ```cmd
 pytest
@@ -112,12 +107,22 @@ contains an extensive set of example values which are useful as validation cases
 
 ## References ##
 
-* [ITS Propagation Library Wiki](https://ntia.github.io/propagation-library-wiki)
-* [P2108 Wiki Page](https://ntia.github.io/propagation-library-wiki/models/P2108)
-* [`ITS.ITU.PSeries.P2108` C++ API Reference](https://ntia.github.io/P2108)
-* [Recommendation ITU-R P.2108](https://www.itu.int/rec/R-REC-P.2108/en)
-* [Report ITU-R P.2402](https://www.itu.int/pub/R-REP-P.2402)
+- [ITS Propagation Library Wiki](https://ntia.github.io/propagation-library-wiki)
+- [P2108 Wiki Page](https://ntia.github.io/propagation-library-wiki/models/P2108)
+- [`ITS.ITU.PSeries.P2108` C++ API Reference](https://ntia.github.io/P2108)
+- [Recommendation ITU-R P.2108](https://www.itu.int/rec/R-REC-P.2108/en)
+- [Report ITU-R P.2402](https://www.itu.int/pub/R-REP-P.2402)
+
+## License ##
+
+See [LICENSE](./LICENSE.md).
+
+"Python" and the Python logos are trademarks or registered trademarks of the Python Software Foundation, used by the National Telecommunications and Information Administration with permission from the Foundation.
 
 ## Contact ##
 
 For technical questions, contact <code@ntia.gov>.
+
+## Disclaimer ##
+
+Certain commercial equipment, instruments, or materials are identified in this project were used for the convenience of the developers. In no case does such identification imply recommendation or endorsement by the National Telecommunications and Information Administration, nor does it imply that the material or equipment identified is necessarily the best available for the purpose.
