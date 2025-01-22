@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "P2108"
+name = "proplib-p2108"
 dynamic = ["version"]
 description = "Python wrapper for U.S. Reference Software Implementation of Recommendation ITU-R P.2108"
 readme = "README.md"
