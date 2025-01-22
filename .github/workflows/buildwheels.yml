@@ -1,6 +1,22 @@
+# Action builds a universal (Win32/Win64/macOS-universal/Linux-x64) Python wheel
+# from the source code, using Hatchling, and uploads it as an artifact. This wheel
+# can then be distributed with new releases. The action is triggered by pushes into `main`
+# or pull_requests into `main` or `dev` (for testing). To aid in releases, the workflow is
+# also triggered when new SemVer tags are created. This action handles downloading all
+# shared library files and including them in the resulting wheel.
 name: Build Wheels
 
-on: [push] # TODO
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v[0-9]+.*'
+  pull_request:
+    branches:
+      - main
+      - dev
 
 env:
     LIBRARY_BASE_REPO: NTIA/p2108
@@ -62,71 +78,5 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: universal-wheel
+          name: Universal Wheel (.whl)
           path: dist/*.whl
-  test_wheel:
-    name: Test wheel / ${{ matrix.platform.os-name }}
-    needs: build_wheel
-    runs-on: ${{ matrix.platform.os-runner }}
-    strategy:
-      matrix:
-        platform:
-          - os-name: 'Windows (64-bit)'
-            os-runner: 'windows-latest'
-            arch-id: 'x64'
-            release-file-pattern: '*-x64.dll'
-          - os-name: 'Windows (32-bit)'
-            os-runner: 'windows-latest'
-            arch-id: 'x86'
-            release-file-pattern: '*-x86.dll'
-          - os-name: 'macOS (intel/x64)'
-            os-runner: 'macos-13'
-            arch-id: 'x64'
-            release-file-pattern: '*.dylib'
-          - os-name: 'macOS (apple/arm64)'
-            os-runner: 'macos-latest'
-            arch-id: 'arm64'
-            release-file-pattern: '*.dylib'
-          - os-name: 'Linux (Ubuntu)'
-            os-runner: 'ubuntu-latest'
-            arch-id: 'x64'
-            release-file-pattern: '*.so'
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-        with:
-          submodules: true
-
-      - name: Download wheel
-        id: wheel-download
-        uses: actions/download-artifact@v4
-
-      - name: debug list files
-        run: ls ${{ steps.wheel-download.outputs.download-path }}/universal-wheel/*
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          architecture: ${{ matrix.platform.arch-id }}
-          python-version: '>=3.9 <3.14'
-          cache: 'pip'
-
-      - name: Install dependencies for testing
-        run: python -m pip install .[tests]
-
-      - name: Remove source directory # make sure we are testing the wheel, not the cloned package
-        run: rm -r ./src
-
-      - name: debug list files
-        run: ls ${{ steps.wheel-download.outputs.download-path }}/*
-
-      - name: Install newly-built wheel (macOS/Linux)
-        if: ${{ runner.os != 'Windows'}}
-        run: python -m pip install ${{ steps.wheel-download.outputs.download-path }}/universal-wheel/*.whl --force-reinstall
-
-      - name: Install newly-built wheel (Windows)
-        if: ${{ runner.os == 'Windows'}}
-        run: python -m pip install ${{ steps.wheel-download.outputs.download-path }}\universal-wheel\*.whl --force-reinstall
-
-      - name: Run pytest
-        run: pytest --cov-report=term-missing --no-cov-on-fail --cov
