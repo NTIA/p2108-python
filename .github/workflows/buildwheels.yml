@@ -8,7 +8,7 @@ env:
     LIBRARY_DESTINATION_DIRECTORY: 'src/ITS/ITU/PSeries/P2108/'
 
 jobs:
-  build_wheels:
+  build_wheel:
     name: Build a universal, cross-platform wheel
     runs-on: ubuntu-latest
     steps:
@@ -72,3 +72,58 @@ jobs:
         with:
           name: Universal Wheel (.whl)
           path: dist/*.whl
+  test_wheel:
+    name: Test wheel / ${{ matrix.platform.os-name }}
+    needs: build_wheel
+    runs-on: ${{ matrix.platform.os-runner }}
+    strategy:
+      matrix:
+        platform:
+          - os-name: 'Windows (64-bit)'
+            os-runner: 'windows-latest'
+            arch-id: 'x64'
+            release-file-pattern: '*-x64.dll'
+          - os-name: 'Windows (32-bit)'
+            os-runner: 'windows-latest'
+            arch-id: 'x86'
+            release-file-pattern: '*-x86.dll'
+          - os-name: 'macOS (intel/x64)'
+            os-runner: 'macos-13'
+            arch-id: 'x64'
+            release-file-pattern: '*.dylib'
+          - os-name: 'macOS (apple/arm64)'
+            os-runner: 'macos-latest'
+            arch-id: 'arm64'
+            release-file-pattern: '*.dylib'
+          - os-name: 'Linux (Ubuntu)'
+            os-runner: 'ubuntu-latest'
+            arch-id: 'x64'
+            release-file-pattern: '*.so'
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Download wheel
+        id: wheel-artifact-download
+        uses: actions/download-artifact@v4
+
+      - name: Set up Python ${{ matrix.py }}
+        uses: actions/setup-python@v5
+        with:
+          architecture: ${{ matrix.platform.arch-id }}
+          python-version: ${{ matrix.py }}
+          cache: 'pip'
+
+      - name: Install dependencies for testing
+        run: python -m pip install .[tests]
+
+      - name: Remove source directory # make sure we are testing the wheel, not the cloned package
+        run: rm -r ./src
+
+      - name: Install newly-built wheel
+        run: python -m pip install ${{ steps.wheel-artifact-download.outputs.download-path }}/*.whl --force-reinstall
+
+      - name: Run pytest
+        run: pytest --cov-report=term-missing --no-cov-on-fail --cov
