@@ -4,7 +4,7 @@ from enum import IntEnum
 from .proplib_loader import PropLibCDLL
 
 # Load the shared library
-lib = PropLibCDLL("P2108-1.0")
+lib = PropLibCDLL("P2108-1.1")
 
 # Define function prototypes
 lib.AeronauticalStatisticalModel.restype = c_int
