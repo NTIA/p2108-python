@@ -49,7 +49,7 @@ tests = [
 dev = [
     "hatchling>=1.25.0,<2.0",
     "pre-commit>=4.0.1,<5.0",
-    "P2108[tests]",
+    "proplib-p2108[tests]",
 ]
 [project.urls]
 "PropLib Wiki" = "https://ntia.github.io/propagation-library-wiki/models/P2108/"
